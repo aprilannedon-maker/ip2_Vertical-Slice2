@@ -50,8 +50,7 @@ builder.Services.AddOpenApi(options =>
 
 var app = builder.Build();
 
-// Seed data
-using (var scope = app.Services.CreateScope())
+await app.Services.MigrateAndSeedAsync();
 {
     var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
     dbContext.Students.AddRange(
